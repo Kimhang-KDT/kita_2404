@@ -45,3 +45,16 @@ num for num으로 보는 것이 아니라 (num for) (num, freq) (in count.items(
 
 ## Gradio 웹을 사용하지 않고 개발한 솔루션을 시각화할 수 있다
 ## hugging Face 오픈소스를 모두 모아서 제공하는 사이트
+
+===============================================================
+
+# Q8. 이름과 나이를 입력받아 "Hello, [name]. You are [age] years old." 형식으로 출력하세요.
+name = "김한결"\
+age = 28
+
+print("Hello, {}. You are {} years old.".format(name, age))\
+print(f"Hello, {name}. You are {age} years old.")
+
+* .format을 사용해 넣어주는 방법도 있으나 간단하게 print(f'')를 사용할 수 있다.
+* 이를 [문자열 포맷팅]이라고 하며 기존에 사용하던 %포매팅과 str.format보다 최근에 나온 기능이다.
+* 앞에 f를 붙이고 {} 안에 변수명을 써주면 끝!
