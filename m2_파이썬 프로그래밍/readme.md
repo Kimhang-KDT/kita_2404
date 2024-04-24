@@ -37,6 +37,10 @@ print(find_mode(numbers))\
 
 요약하자면, `num for num`은 리스트 컴프리헨션에서 각각의 키(key)를 순회하기 위한 변수 이름이며, `num for num, freq in count.items()`는 `count` 딕셔너리의 각 키(key)와 값(value)을 순회하기 위해 사용됩니다.
 
+frequent_numbers = [num for num, freq in count.items() if freq == max_freq] 에서\
+num for num으로 보는 것이 아니라 (num for) (num, freq) (in count.items()) 이런식으로 묶어 봐야 코드를 알 수 있다.\
+이 코드는 count.items()로 키와 값을 가져온 뒤 각각 num과 freq에 할당한다는 뜻이다.
+
 ===============================================================
 
 ## Gradio 웹을 사용하지 않고 개발한 솔루션을 시각화할 수 있다
