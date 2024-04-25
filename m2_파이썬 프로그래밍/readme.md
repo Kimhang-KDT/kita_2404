@@ -25,18 +25,6 @@ print(find_mode(numbers))\
 
 ## frequent_numbers = [num for num, freq in count.items() if freq == max_freq]
 
-해당 파이썬 코드는 `count` 딕셔너리에서 값(value)이 `max_freq`와 같은 숫자(key)들을 `frequent_numbers`라는 리스트에 담는 역할을 합니다.
-
-`num for num`은 이해하기 쉽게 표현하면 `num`이라고 할 수 있습니다. 이는 리스트 컴프리헨션(List Comprehension)에서 각각의 항목을 순회할 때 사용되는 변수 이름입니다.\
-이 경우에는 `num`을 사용하여 `count` 딕셔너리의 키(key)들을 순회하고 있습니다.
-
-`for num, freq in count.items()`는 `count` 딕셔너리의 각 키(key)와 값(value)을 순회하기 위해 사용됩니다.\
-`items()` 메서드는 딕셔너리의 키(key)와 값(value)을 튜플(tuple) 형태로 반환하는데, `for num, freq in count.items()`는 각 키(key)를 `num`으로, 각 값(value)을 `freq`로 할당하여 사용합니다.
-
-`if freq == max_freq` 조건은 `freq`가 `max_freq`와 같은지를 확인합니다. 만약 `freq`가 `max_freq`와 같다면, 해당 키(key)를 `frequent_numbers` 리스트에 추가합니다.
-
-요약하자면, `num for num`은 리스트 컴프리헨션에서 각각의 키(key)를 순회하기 위한 변수 이름이며, `num for num, freq in count.items()`는 `count` 딕셔너리의 각 키(key)와 값(value)을 순회하기 위해 사용됩니다.
-
 frequent_numbers = [num for num, freq in count.items() if freq == max_freq] 에서\
 num for num으로 보는 것이 아니라 (num for) (num, freq) (in count.items()) 이런식으로 묶어 봐야 코드를 알 수 있다.\
 이 코드는 count.items()로 키와 값을 가져온 뒤 각각 num과 freq에 할당한다는 뜻이다.
