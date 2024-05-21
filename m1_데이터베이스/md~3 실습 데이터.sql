@@ -1,3 +1,35 @@
+--등급컷
+insert into grade_cutoffs values (1, 1, 1, 91, 100);
+insert into grade_cutoffs values (2, 1, 2, 85, 90);
+insert into grade_cutoffs values (3, 1, 3, 77, 84);
+insert into grade_cutoffs values (4, 1, 4, 67, 76);
+insert into grade_cutoffs values (5, 1, 5, 55, 66);
+insert into grade_cutoffs values (6, 1, 6, 44, 54);
+insert into grade_cutoffs values (7, 1, 7, 34, 43);
+insert into grade_cutoffs values (8, 1, 8, 24, 33);
+insert into grade_cutoffs values (9, 1, 9, 0, 23);
+
+insert into grade_cutoffs values (10, 2, 1, 90, 100);
+insert into grade_cutoffs values (11, 2, 2, 80, 89);
+insert into grade_cutoffs values (12, 2, 3, 70, 79);
+insert into grade_cutoffs values (13, 2, 4, 60, 69);
+insert into grade_cutoffs values (14, 2, 5, 50, 59);
+insert into grade_cutoffs values (15, 2, 6, 40, 49);
+insert into grade_cutoffs values (16, 2, 7, 30, 39);
+insert into grade_cutoffs values (17, 2, 8, 20, 29);
+insert into grade_cutoffs values (18, 2, 9, 0, 19);
+
+
+insert into grade_cutoffs values (19, 3, 1, 88, 100);
+insert into grade_cutoffs values (20, 3, 2, 77, 87);
+insert into grade_cutoffs values (21, 3, 3, 63, 76);
+insert into grade_cutoffs values (22, 3, 4, 50, 62);
+insert into grade_cutoffs values (23, 3, 5, 37, 49);
+insert into grade_cutoffs values (24, 3, 6, 29, 36);
+insert into grade_cutoffs values (25, 3, 7, 19, 28);
+insert into grade_cutoffs values (26, 3, 8, 13, 18);
+insert into grade_cutoffs values (27, 3, 9, 0, 12);
+
 --teachers
 INSERT INTO teachers VALUES (1, '김철수', 1, 1, 1);
 INSERT INTO teachers VALUES (2, '이영희', 1, 2, 2);
@@ -43,114 +75,114 @@ delete students;
 commit;
 
 --subject records
-INSERT INTO subject_record VALUES (1, 1, 1, '중간', 85);
-INSERT INTO subject_record VALUES (2, 1, 1, '기말', 90);
-INSERT INTO subject_record VALUES (3, 2, 1, '중간', 92);
-INSERT INTO subject_record VALUES (4, 2, 1, '기말', 88);
-INSERT INTO subject_record VALUES (5, 3, 1, '중간', 78);
-INSERT INTO subject_record VALUES (6, 3, 1, '기말', 82);
-INSERT INTO subject_record VALUES (7, 1, 2, '중간', 88);
-INSERT INTO subject_record VALUES (8, 1, 2, '기말', 92);
-INSERT INTO subject_record VALUES (9, 2, 2, '중간', 90);
-INSERT INTO subject_record VALUES (10, 2, 2, '기말', 95);
-INSERT INTO subject_record VALUES (11, 3, 2, '중간', 82);
-INSERT INTO subject_record VALUES (12, 3, 2, '기말', 85);
-INSERT INTO subject_record VALUES (13, 1, 3, '중간', 92);
-INSERT INTO subject_record VALUES (14, 1, 3, '기말', 95);
-INSERT INTO subject_record VALUES (15, 2, 3, '중간', 87);
-INSERT INTO subject_record VALUES (16, 2, 3, '기말', 92);
-INSERT INTO subject_record VALUES (17, 3, 3, '중간', 90);
-INSERT INTO subject_record VALUES (18, 3, 3, '기말', 88);
-INSERT INTO subject_record VALUES (19, 1, 4, '중간', 85);
-INSERT INTO subject_record VALUES (20, 1, 4, '기말', 90);
-INSERT INTO subject_record VALUES (21, 2, 4, '중간', 92);
-INSERT INTO subject_record VALUES (22, 2, 4, '기말', 95);
-INSERT INTO subject_record VALUES (23, 3, 4, '중간', 78);
-INSERT INTO subject_record VALUES (24, 3, 4, '기말', 82);
-INSERT INTO subject_record VALUES (25, 1, 5, '중간', 88);
-INSERT INTO subject_record VALUES (26, 1, 5, '기말', 92);
-INSERT INTO subject_record VALUES (27, 2, 5, '중간', 90);
-INSERT INTO subject_record VALUES (28, 2, 5, '기말', 88);
-INSERT INTO subject_record VALUES (29, 3, 5, '중간', 82);
-INSERT INTO subject_record VALUES (30, 3, 5, '기말', 85);
-INSERT INTO subject_record VALUES (31, 1, 6, '중간', 92);
-INSERT INTO subject_record VALUES (32, 1, 6, '기말', 95);
-INSERT INTO subject_record VALUES (33, 2, 6, '중간', 87);
-INSERT INTO subject_record VALUES (34, 2, 6, '기말', 92);
-INSERT INTO subject_record VALUES (35, 3, 6, '중간', 90);
-INSERT INTO subject_record VALUES (36, 3, 6, '기말', 88);
-INSERT INTO subject_record VALUES (37, 1, 7, '중간', 88);
-INSERT INTO subject_record VALUES (38, 1, 7, '기말', 92);
-INSERT INTO subject_record VALUES (39, 2, 7, '중간', 85);
-INSERT INTO subject_record VALUES (40, 2, 7, '기말', 90);
-INSERT INTO subject_record VALUES (41, 3, 7, '중간', 92);
-INSERT INTO subject_record VALUES (42, 3, 7, '기말', 95);
-INSERT INTO subject_record VALUES (43, 1, 8, '중간', 90);
-INSERT INTO subject_record VALUES (44, 1, 8, '기말', 88);
-INSERT INTO subject_record VALUES (45, 2, 8, '중간', 92);
-INSERT INTO subject_record VALUES (46, 2, 8, '기말', 95);
-INSERT INTO subject_record VALUES (47, 3, 8, '중간', 87);
-INSERT INTO subject_record VALUES (48, 3, 8, '기말', 92);
-INSERT INTO subject_record VALUES (49, 1, 9, '중간', 85);
-INSERT INTO subject_record VALUES (50, 1, 9, '기말', 90);
-INSERT INTO subject_record VALUES (51, 2, 9, '중간', 88);
-INSERT INTO subject_record VALUES (52, 2, 9, '기말', 92);
-INSERT INTO subject_record VALUES (53, 3, 9, '중간', 90);
-INSERT INTO subject_record VALUES (54, 3, 9, '기말', 88);
-INSERT INTO subject_record VALUES (55, 1, 10, '중간', 92);
-INSERT INTO subject_record VALUES (56, 1, 10, '기말', 95);
-INSERT INTO subject_record VALUES (57, 2, 10, '중간', 85);
-INSERT INTO subject_record VALUES (58, 2, 10, '기말', 90);
-INSERT INTO subject_record VALUES (59, 3, 10, '중간', 88);
-INSERT INTO subject_record VALUES (60, 3, 10, '기말', 92);
-INSERT INTO subject_record VALUES (61, 1, 11, '중간', 90);
-INSERT INTO subject_record VALUES (62, 1, 11, '기말', 88);
-INSERT INTO subject_record VALUES (63, 2, 11, '중간', 92);
-INSERT INTO subject_record VALUES (64, 2, 11, '기말', 95);
-INSERT INTO subject_record VALUES (65, 3, 11, '중간', 85);
-INSERT INTO subject_record VALUES (66, 3, 11, '기말', 90);
-INSERT INTO subject_record VALUES (67, 1, 12, '중간', 88);
-INSERT INTO subject_record VALUES (68, 1, 12, '기말', 92);
-INSERT INTO subject_record VALUES (69, 2, 12, '중간', 90);
-INSERT INTO subject_record VALUES (70, 2, 12, '기말', 88);
-INSERT INTO subject_record VALUES (71, 3, 12, '중간', 92);
-INSERT INTO subject_record VALUES (72, 3, 12, '기말', 95);
-INSERT INTO subject_record VALUES (73, 1, 13, '중간', 85);
-INSERT INTO subject_record VALUES (74, 1, 13, '기말', 90);
-INSERT INTO subject_record VALUES (75, 2, 13, '중간', 88);
-INSERT INTO subject_record VALUES (76, 2, 13, '기말', 92);
-INSERT INTO subject_record VALUES (77, 3, 13, '중간', 90);
-INSERT INTO subject_record VALUES (78, 3, 13, '기말', 88);
-INSERT INTO subject_record VALUES (79, 1, 14, '중간', 92);
-INSERT INTO subject_record VALUES (80, 1, 14, '기말', 95);
-INSERT INTO subject_record VALUES (81, 2, 14, '중간', 85);
-INSERT INTO subject_record VALUES (82, 2, 14, '기말', 90);
-INSERT INTO subject_record VALUES (83, 3, 14, '중간', 88);
-INSERT INTO subject_record VALUES (84, 3, 14, '기말', 92);
-INSERT INTO subject_record VALUES (85, 1, 15, '중간', 90);
-INSERT INTO subject_record VALUES (86, 1, 15, '기말', 88);
-INSERT INTO subject_record VALUES (87, 2, 15, '중간', 92);
-INSERT INTO subject_record VALUES (88, 2, 15, '기말', 95);
-INSERT INTO subject_record VALUES (89, 3, 15, '중간', 85);
-INSERT INTO subject_record VALUES (90, 3, 15, '기말', 90);
-INSERT INTO subject_record VALUES (91, 1, 16, '중간', 88);
-INSERT INTO subject_record VALUES (92, 1, 16, '기말', 92);
-INSERT INTO subject_record VALUES (93, 2, 16, '중간', 90);
-INSERT INTO subject_record VALUES (94, 2, 16, '기말', 88);
-INSERT INTO subject_record VALUES (95, 3, 16, '중간', 92);
-INSERT INTO subject_record VALUES (96, 3, 16, '기말', 95);
-INSERT INTO subject_record VALUES (97, 1, 17, '중간', 85);
-INSERT INTO subject_record VALUES (98, 1, 17, '기말', 90);
-INSERT INTO subject_record VALUES (99, 2, 17, '중간', 88);
-INSERT INTO subject_record VALUES (100, 2, 17, '기말', 92);
-INSERT INTO subject_record VALUES (101, 3, 17, '중간', 90);
-INSERT INTO subject_record VALUES (102, 3, 17, '기말', 88);
-INSERT INTO subject_record VALUES (103, 1, 18, '중간', 92);
-INSERT INTO subject_record VALUES (104, 1, 18, '기말', 95);
-INSERT INTO subject_record VALUES (105, 2, 18, '중간', 85);
-INSERT INTO subject_record VALUES (106, 2, 18, '기말', 90);
-INSERT INTO subject_record VALUES (107, 3, 18, '중간', 88);
-INSERT INTO subject_record VALUES (108, 3, 18, '기말', 92);
+INSERT INTO subject_records VALUES (1, 1, 1, '중간', 85);
+INSERT INTO subject_records VALUES (2, 1, 1, '기말', 90);
+INSERT INTO subject_records VALUES (3, 2, 1, '중간', 92);
+INSERT INTO subject_records VALUES (4, 2, 1, '기말', 88);
+INSERT INTO subject_records VALUES (5, 3, 1, '중간', 78);
+INSERT INTO subject_records VALUES (6, 3, 1, '기말', 82);
+INSERT INTO subject_records VALUES (7, 1, 2, '중간', 88);
+INSERT INTO subject_records VALUES (8, 1, 2, '기말', 92);
+INSERT INTO subject_records VALUES (9, 2, 2, '중간', 90);
+INSERT INTO subject_records VALUES (10, 2, 2, '기말', 95);
+INSERT INTO subject_records VALUES (11, 3, 2, '중간', 82);
+INSERT INTO subject_records VALUES (12, 3, 2, '기말', 85);
+INSERT INTO subject_records VALUES (13, 1, 3, '중간', 92);
+INSERT INTO subject_records VALUES (14, 1, 3, '기말', 95);
+INSERT INTO subject_records VALUES (15, 2, 3, '중간', 87);
+INSERT INTO subject_records VALUES (16, 2, 3, '기말', 92);
+INSERT INTO subject_records VALUES (17, 3, 3, '중간', 90);
+INSERT INTO subject_records VALUES (18, 3, 3, '기말', 88);
+INSERT INTO subject_records VALUES (19, 1, 4, '중간', 85);
+INSERT INTO subject_records VALUES (20, 1, 4, '기말', 90);
+INSERT INTO subject_records VALUES (21, 2, 4, '중간', 92);
+INSERT INTO subject_records VALUES (22, 2, 4, '기말', 95);
+INSERT INTO subject_records VALUES (23, 3, 4, '중간', 78);
+INSERT INTO subject_records VALUES (24, 3, 4, '기말', 82);
+INSERT INTO subject_records VALUES (25, 1, 5, '중간', 88);
+INSERT INTO subject_records VALUES (26, 1, 5, '기말', 92);
+INSERT INTO subject_records VALUES (27, 2, 5, '중간', 90);
+INSERT INTO subject_records VALUES (28, 2, 5, '기말', 88);
+INSERT INTO subject_records VALUES (29, 3, 5, '중간', 82);
+INSERT INTO subject_records VALUES (30, 3, 5, '기말', 85);
+INSERT INTO subject_records VALUES (31, 1, 6, '중간', 92);
+INSERT INTO subject_records VALUES (32, 1, 6, '기말', 95);
+INSERT INTO subject_records VALUES (33, 2, 6, '중간', 87);
+INSERT INTO subject_records VALUES (34, 2, 6, '기말', 92);
+INSERT INTO subject_records VALUES (35, 3, 6, '중간', 90);
+INSERT INTO subject_records VALUES (36, 3, 6, '기말', 88);
+INSERT INTO subject_records VALUES (37, 1, 7, '중간', 88);
+INSERT INTO subject_records VALUES (38, 1, 7, '기말', 92);
+INSERT INTO subject_records VALUES (39, 2, 7, '중간', 85);
+INSERT INTO subject_records VALUES (40, 2, 7, '기말', 90);
+INSERT INTO subject_records VALUES (41, 3, 7, '중간', 92);
+INSERT INTO subject_records VALUES (42, 3, 7, '기말', 95);
+INSERT INTO subject_records VALUES (43, 1, 8, '중간', 90);
+INSERT INTO subject_records VALUES (44, 1, 8, '기말', 88);
+INSERT INTO subject_records VALUES (45, 2, 8, '중간', 92);
+INSERT INTO subject_records VALUES (46, 2, 8, '기말', 95);
+INSERT INTO subject_records VALUES (47, 3, 8, '중간', 87);
+INSERT INTO subject_records VALUES (48, 3, 8, '기말', 92);
+INSERT INTO subject_records VALUES (49, 1, 9, '중간', 85);
+INSERT INTO subject_records VALUES (50, 1, 9, '기말', 90);
+INSERT INTO subject_records VALUES (51, 2, 9, '중간', 88);
+INSERT INTO subject_records VALUES (52, 2, 9, '기말', 92);
+INSERT INTO subject_records VALUES (53, 3, 9, '중간', 90);
+INSERT INTO subject_records VALUES (54, 3, 9, '기말', 88);
+INSERT INTO subject_records VALUES (55, 1, 10, '중간', 92);
+INSERT INTO subject_records VALUES (56, 1, 10, '기말', 95);
+INSERT INTO subject_records VALUES (57, 2, 10, '중간', 85);
+INSERT INTO subject_records VALUES (58, 2, 10, '기말', 90);
+INSERT INTO subject_records VALUES (59, 3, 10, '중간', 88);
+INSERT INTO subject_records VALUES (60, 3, 10, '기말', 92);
+INSERT INTO subject_records VALUES (61, 1, 11, '중간', 90);
+INSERT INTO subject_records VALUES (62, 1, 11, '기말', 88);
+INSERT INTO subject_records VALUES (63, 2, 11, '중간', 92);
+INSERT INTO subject_records VALUES (64, 2, 11, '기말', 95);
+INSERT INTO subject_records VALUES (65, 3, 11, '중간', 85);
+INSERT INTO subject_records VALUES (66, 3, 11, '기말', 90);
+INSERT INTO subject_records VALUES (67, 1, 12, '중간', 88);
+INSERT INTO subject_records VALUES (68, 1, 12, '기말', 92);
+INSERT INTO subject_records VALUES (69, 2, 12, '중간', 90);
+INSERT INTO subject_records VALUES (70, 2, 12, '기말', 88);
+INSERT INTO subject_records VALUES (71, 3, 12, '중간', 92);
+INSERT INTO subject_records VALUES (72, 3, 12, '기말', 95);
+INSERT INTO subject_records VALUES (73, 1, 13, '중간', 85);
+INSERT INTO subject_records VALUES (74, 1, 13, '기말', 90);
+INSERT INTO subject_records VALUES (75, 2, 13, '중간', 88);
+INSERT INTO subject_records VALUES (76, 2, 13, '기말', 92);
+INSERT INTO subject_records VALUES (77, 3, 13, '중간', 90);
+INSERT INTO subject_records VALUES (78, 3, 13, '기말', 88);
+INSERT INTO subject_records VALUES (79, 1, 14, '중간', 92);
+INSERT INTO subject_records VALUES (80, 1, 14, '기말', 95);
+INSERT INTO subject_records VALUES (81, 2, 14, '중간', 85);
+INSERT INTO subject_records VALUES (82, 2, 14, '기말', 90);
+INSERT INTO subject_records VALUES (83, 3, 14, '중간', 88);
+INSERT INTO subject_records VALUES (84, 3, 14, '기말', 92);
+INSERT INTO subject_records VALUES (85, 1, 15, '중간', 90);
+INSERT INTO subject_records VALUES (86, 1, 15, '기말', 88);
+INSERT INTO subject_records VALUES (87, 2, 15, '중간', 92);
+INSERT INTO subject_records VALUES (88, 2, 15, '기말', 95);
+INSERT INTO subject_records VALUES (89, 3, 15, '중간', 85);
+INSERT INTO subject_records VALUES (90, 3, 15, '기말', 90);
+INSERT INTO subject_records VALUES (91, 1, 16, '중간', 88);
+INSERT INTO subject_records VALUES (92, 1, 16, '기말', 92);
+INSERT INTO subject_records VALUES (93, 2, 16, '중간', 90);
+INSERT INTO subject_records VALUES (94, 2, 16, '기말', 88);
+INSERT INTO subject_records VALUES (95, 3, 16, '중간', 92);
+INSERT INTO subject_records VALUES (96, 3, 16, '기말', 95);
+INSERT INTO subject_records VALUES (97, 1, 17, '중간', 85);
+INSERT INTO subject_records VALUES (98, 1, 17, '기말', 90);
+INSERT INTO subject_records VALUES (99, 2, 17, '중간', 88);
+INSERT INTO subject_records VALUES (100, 2, 17, '기말', 92);
+INSERT INTO subject_records VALUES (101, 3, 17, '중간', 90);
+INSERT INTO subject_records VALUES (102, 3, 17, '기말', 88);
+INSERT INTO subject_records VALUES (103, 1, 18, '중간', 92);
+INSERT INTO subject_records VALUES (104, 1, 18, '기말', 95);
+INSERT INTO subject_records VALUES (105, 2, 18, '중간', 85);
+INSERT INTO subject_records VALUES (106, 2, 18, '기말', 90);
+INSERT INTO subject_records VALUES (107, 3, 18, '중간', 88);
+INSERT INTO subject_records VALUES (108, 3, 18, '기말', 92);
 
 --student records
 INSERT INTO student_records (id, student_id, student_grade, student_rank, student_eval, attendance_rate)
@@ -206,3 +238,42 @@ VALUES (17, 17, 3, 5, '성적 향상을 위해 꾸준히 노력하는 모습이 보기 좋습니다. 앞
 
 INSERT INTO student_records (id, student_id, student_grade, student_rank, student_eval, attendance_rate)
 VALUES (18, 18, 3, 1, '학업 성적이 우수하고, 모범적인 학습 태도를 보이는 학생입니다. 앞으로도 이러한 자세를 유지하길 바랍니다.', 98.47);
+
+
+--student_health
+INSERT INTO student_health (id, student_id, height, weight, sex, blood_type, vision_left, vision_right, chronic, emergency_contact_name, emergency_contact_relationship, emergency_contact_phone)
+VALUES (1, 1, 142, 52, 'F', 'A', 1.20, 0.80, '천식', 'Contact_1', '부', '01012345678');
+INSERT INTO student_health (id, student_id, height, weight, sex, blood_type, vision_left, vision_right, chronic, emergency_contact_name, emergency_contact_relationship, emergency_contact_phone)
+VALUES (2, 2, 158, 64, 'F', 'B', 0.90, 1.00, '아토피', 'Contact_2', '모', '01023456789');
+INSERT INTO student_health (id, student_id, height, weight, sex, blood_type, vision_left, vision_right, chronic, emergency_contact_name, emergency_contact_relationship, emergency_contact_phone)
+VALUES (3, 3, 150, 57, 'F', 'O', 1.00, 0.90, NULL, 'Contact_3', '조부', '01034567890');
+INSERT INTO student_health (id, student_id, height, weight, sex, blood_type, vision_left, vision_right, chronic, emergency_contact_name, emergency_contact_relationship, emergency_contact_phone)
+VALUES (4, 4, 147, 49, 'F', 'AB', 0.70, 1.10, NULL, 'Contact_4', '조모', '01045678901');
+INSERT INTO student_health (id, student_id, height, weight, sex, blood_type, vision_left, vision_right, chronic, emergency_contact_name, emergency_contact_relationship, emergency_contact_phone)
+VALUES (5, 5, 155, 55, 'F', 'A', 1.10, 1.00, NULL, 'Contact_5', '부', '01056789012');
+INSERT INTO student_health (id, student_id, height, weight, sex, blood_type, vision_left, vision_right, chronic, emergency_contact_name, emergency_contact_relationship, emergency_contact_phone)
+VALUES (6, 6, 149, 53, 'F', 'B', 0.80, 0.70, NULL, 'Contact_6', '모', '01067890123');
+INSERT INTO student_health (id, student_id, height, weight, sex, blood_type, vision_left, vision_right, chronic, emergency_contact_name, emergency_contact_relationship, emergency_contact_phone)
+VALUES (7, 7, 143, 50, 'F', 'O', 1.30, 1.20, NULL, 'Contact_7', '조부', '01078901234');
+INSERT INTO student_health (id, student_id, height, weight, sex, blood_type, vision_left, vision_right, chronic, emergency_contact_name, emergency_contact_relationship, emergency_contact_phone)
+VALUES (8, 8, 160, 60, 'F', 'AB', 0.60, 0.90, NULL, 'Contact_8', '조모', '01089012345');
+INSERT INTO student_health (id, student_id, height, weight, sex, blood_type, vision_left, vision_right, chronic, emergency_contact_name, emergency_contact_relationship, emergency_contact_phone)
+VALUES (9, 9, 145, 51, 'F', 'A', 1.00, 1.10, NULL, 'Contact_9', '부', '01090123456');
+INSERT INTO student_health (id, student_id, height, weight, sex, blood_type, vision_left, vision_right, chronic, emergency_contact_name, emergency_contact_relationship, emergency_contact_phone)
+VALUES (10, 10, 170, 70, 'M', 'B', 1.10, 1.00, NULL, 'Contact_10', '모', '01001234567');
+INSERT INTO student_health (id, student_id, height, weight, sex, blood_type, vision_left, vision_right, chronic, emergency_contact_name, emergency_contact_relationship, emergency_contact_phone)
+VALUES (11, 11, 165, 68, 'M', 'O', 0.90, 1.20, NULL, 'Contact_11', '조부', '01012345098');
+INSERT INTO student_health (id, student_id, height, weight, sex, blood_type, vision_left, vision_right, chronic, emergency_contact_name, emergency_contact_relationship, emergency_contact_phone)
+VALUES (12, 12, 160, 62, 'M', 'AB', 0.80, 1.10, NULL, 'Contact_12', '조모', '01023456089');
+INSERT INTO student_health (id, student_id, height, weight, sex, blood_type, vision_left, vision_right, chronic, emergency_contact_name, emergency_contact_relationship, emergency_contact_phone)
+VALUES (13, 13, 155, 58, 'M', 'A', 1.00, 0.90, NULL, 'Contact_13', '부', '01034567098');
+INSERT INTO student_health (id, student_id, height, weight, sex, blood_type, vision_left, vision_right, chronic, emergency_contact_name, emergency_contact_relationship, emergency_contact_phone)
+VALUES (14, 14, 150, 54, 'M', 'B', 0.90, 1.30, NULL, 'Contact_14', '모', '01045678098');
+INSERT INTO student_health (id, student_id, height, weight, sex, blood_type, vision_left, vision_right, chronic, emergency_contact_name, emergency_contact_relationship, emergency_contact_phone)
+VALUES (15, 15, 172, 72, 'M', 'O', 1.20, 1.10, NULL, 'Contact_15', '조부', '01056789098');
+INSERT INTO student_health (id, student_id, height, weight, sex, blood_type, vision_left, vision_right, chronic, emergency_contact_name, emergency_contact_relationship, emergency_contact_phone)
+VALUES (16, 16, 175, 75, 'M', 'AB', 1.00, 0.90, '알레르기', 'Contact_16', '조모', '01067890198');
+INSERT INTO student_health (id, student_id, height, weight, sex, blood_type, vision_left, vision_right, chronic, emergency_contact_name, emergency_contact_relationship, emergency_contact_phone)
+VALUES (17, 17, 162, 65, 'M', 'A', 0.80, 1.20, NULL, 'Contact_17', '부', '01078901298');
+INSERT INTO student_health (id, student_id, height, weight, sex, blood_type, vision_left, vision_right, chronic, emergency_contact_name, emergency_contact_relationship, emergency_contact_phone)
+VALUES (18, 18, 168, 70, 'M', 'B', 0.90, 1.00, NULL, 'Contact_18', '모', '01089012398');
