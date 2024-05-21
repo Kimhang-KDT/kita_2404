@@ -102,27 +102,35 @@ select * from customer; --대한민국 대전
 update customer set address = (select address from customer where name = '김연아')
 where name = '박세리';
 select * from customer; --대한민국 서울
+rollback;
 --Task3_0520. 도서 제목에 ‘야구’가 포함된 도서를 ‘농구’로 변경한 후 도서 목록, 가격을 보이시오.
-select bookname from book where bookname like '%야구%'; --야구의 추억, 야구를 부탁해
---야구가 포함된 bookname을 찾아 야구를 축구로 변경하라 bookname = '축구%'로 변경하라
+select bookid, replace(bookname, '야구', '농구') as bookname, publisher, price from book;
 update book set bookname = replace(bookname, '야구', '농구') where bookname like '%야구%';
+
 select bookname from book where bookname like '%야구%';
 select bookname from book where bookname like '%농구%';
 
 --Task4_0520. 마당서점의 고객 중에서 같은 성(姓)을 가진 사람이 몇 명이나 되는지 성별 인원수를 구하시오
+--GROUP BY 절에서는 별칭이 아닌 substr() 표현식 자체를 사용해야한다.
 select substr(name, 1, 1) 성, count(name) 인원수 from customer 
 group by substr(name, 1,1);
 
 --Task5_0520. 마당서점은 주문일로부터 10일 후 매출을 확정한다. 각 주문의 확정일자를 구하시오.
-select orderid, orderdate+10 확정일자 from orders;
+select orderdate 주문일, orderdate+10 확정일자 from orders;
+
+--2개월 후로 주문을 확정한다면? ADD_MONTHS()
+select orderdate 주문일, add_months(orderdate, 2) 확정일자 from orders;
+
 --Task6_0520.마당서점이 2020년 7월 7일에 주문받은 도서의 주문번호, 주문일, 고객번호, 도서번호를 모두 보이시오. 
 --단 주문일은 ‘yyyy-mm-dd 요일’ 형태로 표시한다.
-select orderid, custid, bookid, saleprice, 
+select orderid 주문번호, custid 고객번호, bookid 도서번호, saleprice 주문금액, 
 TO_CHAR(orderdate, 'YYYY-MM-DD DAY') 주문날짜 --한글 인코딩 안될 경우 : 'NLS_DATE_LANGUAGE=KOREAN'
 from orders where orderdate = '20-07-07';
+
 --Task7_0520. 평균 주문금액 이하의 주문에 대해서 주문번호와 금액을 보이시오.
 select orderid 주문번호, saleprice 금액 from orders
 where saleprice < (select avg(saleprice) from orders); 
+
 --Task8_0520. 대한민국’에 거주하는 고객에게 판매한 도서의 총 판매액을 구하시오.
 select C.name 고객명, sum(O.saleprice) "총 판매액" from orders O, customer C
 where c.address like '%대한민국%'
