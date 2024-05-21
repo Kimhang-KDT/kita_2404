@@ -15,9 +15,16 @@ create table students(
 create table student_health(
     id number primary key,
     student_id number not null,
-    height number,
-    weight number,
-    personal varchar(100),
+    height number, -- 키(cm)
+    weight number, -- 몸무게(kg)
+    sex char, --F / M
+    blood_type varchar2(2), -- 혈액형
+    vision_left number(3,2), -- 왼쪽 시력
+    vision_right number(3,2), -- 오른쪽 시력
+    chronic varchar2(200), -- 병력
+    emergency_contact_name varchar2(30), -- 비상 연락망 이름
+    emergency_contact_relationship varchar2(20), -- 비상 연락망 관계
+    emergency_contact_phone number(11), -- 비상 연락망 전화번호
     foreign key(student_id) references students(id) on delete cascade
 );
 
@@ -36,7 +43,7 @@ create table subjects(
     subject varchar(20) not null
 );
 
-create table subject_record(
+create table subject_records(
     id number primary key,
     subject_id number not null,
     student_id number not null,
@@ -44,15 +51,6 @@ create table subject_record(
     score number default 0 not null, --성적 기본값 0
     foreign key(student_id) references students(id) on delete cascade,
     foreign key(subject_id) references subjects(id) on delete cascade
-);
-
-create table student_parents(
-    id number primary key,
-    student_id number not null,
-    name varchar2(30),
-    phone number(11),
-    living_together char, --동거여부
-    foreign key(student_id) references students(id) on delete cascade
 );
 
 create table teachers(
@@ -63,3 +61,14 @@ create table teachers(
     subject number, --담당과목
     foreign key(subject) references subjects(id)
 );
+
+create table grade_cutoffs(
+    id number primary key,
+    subject_id number not null,
+    grade number not null, -- 등급 (예: 1, 2, 3)
+    min_score number not null, -- 최소 점수
+    max_score number not null, -- 최대 점수
+    foreign key(subject_id) references subjects(id) on delete cascade
+);
+
+commit;
