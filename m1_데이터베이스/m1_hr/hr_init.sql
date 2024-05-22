@@ -122,7 +122,7 @@ Contains 25 rows. References with jobs, employees, and departments tables.';
    "STATE_PROVINCE" VARCHAR2(25), 
    "COUNTRY_ID" CHAR(2)
    ) ;
---дц╥Ё аж╪╝ ╩Щ╪╨
+--ц└ц┐б╥бЁ ц│ц√б╪б╝ б╩ц╫б╪б╨
    COMMENT ON COLUMN "LOCATIONS"."LOCATION_ID" IS 'Primary key of locations table';
    COMMENT ON COLUMN "LOCATIONS"."STREET_ADDRESS" IS 'Street address of an office, warehouse, or production site of a company.
 Contains building number and street name';
