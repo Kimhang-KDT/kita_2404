@@ -1,23 +1,23 @@
 select * from student_records;
 
-select S.name ÇĞ»ı¸í, S.grade ÇĞ³â, round(avg(R.score),1) Æò±Õ, K.student_rank µî¼ö
+select S.name í•™ìƒëª…, S.grade í•™ë…„, round(avg(R.score),1) í‰ê· , K.student_rank ë“±ìˆ˜
 from subject_record R, students S, student_records K
 where S.id = R.student_id and S.id = K.student_id
 group by S.name, S.grade, K.student_rank;
 
-select S.name ÇĞ»ı¸í, H.personal Áúº´
+select S.name í•™ìƒëª…, H.personal ì§ˆë³‘
 from students S, student_health H
 where S.id = h.student_id and h.personal != 'Null';
 
-select t.grade ÇĞ³â, t.class ¹İ, t.name ¼±»ı´Ô, count(s.id) ÇĞ»ı¼ö
+select t.grade í•™ë…„, t.class ë°˜, t.name ì„ ìƒë‹˜, count(s.id) í•™ìƒìˆ˜
 from teachers t, students s
 where t.grade = s.grade and t.class = s.class
 group by t.name, t.class, t.grade
 order by t.grade, t.class;
 
 
---ÇĞ»ıÀÇ Áß°£/±â¸» ½ÃÇè Æò±Õ(subject_records)À» grade_cutoffs¿¡ ´ëÁ¶ÇÏ¿© 
---student_recordsÀÇ student_rank¸¦ µî±ŞÀ¸·Î Ç¥±â
+--í•™ìƒì˜ ì¤‘ê°„/ê¸°ë§ ì‹œí—˜ í‰ê· (subject_records)ì„ grade_cutoffsì— ëŒ€ì¡°í•˜ì—¬ 
+--student_recordsì˜ student_rankë¥¼ ë“±ê¸‰ìœ¼ë¡œ í‘œê¸°
 
 with avg_scores as (
 select student_id, ROUND(avg(score), 1) avg_score
@@ -37,7 +37,7 @@ group by sr.student_id, sg.avg_score, sg.grade
 order by sr.student_id;
 
 
---Ãâ¼®·üÀÌ ÀúÁ¶ÇÑ ÇĞ»ıµéÀÇ µ¥ÀÌÅÍ¸¦ Ã£¾Æ³»¾î ±×µéÀÇ ºñ»ó¿¬¶ô¸Á°ú ÇÔ²² Ãâ·Â
+--ì¶œì„ë¥ ì´ ì €ì¡°í•œ í•™ìƒë“¤ì˜ ë°ì´í„°ë¥¼ ì°¾ì•„ë‚´ì–´ ê·¸ë“¤ì˜ ë¹„ìƒì—°ë½ë§ê³¼ í•¨ê»˜ ì¶œë ¥
 with student_attendence as (
 select sr.student_id, sr.attendance_rate as rate
 from student_records sr
@@ -48,7 +48,7 @@ from student_health sh
 join student_attendence sa on sa.student_id = sh.student_id
 group by sa.student_id, sa.rate, sh.emergency_contact_name, sh.emergency_contact_phone;
 
---Æ¯ÀÌ»çÇ×(Áúº´ µî)ÀÌ ÀÖ´Â ÇĞ»ıµéÀÇ µ¥ÀÌÅÍ¸¦ »Ì¾Æ³½´Ù.
+--íŠ¹ì´ì‚¬í•­(ì§ˆë³‘ ë“±)ì´ ìˆëŠ” í•™ìƒë“¤ì˜ ë°ì´í„°ë¥¼ ë½‘ì•„ë‚¸ë‹¤.
 select s.id, s.name, h.chronic
 from students s
 join student_health h on s.id = h.student_id
