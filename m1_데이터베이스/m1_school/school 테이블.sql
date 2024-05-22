@@ -1,4 +1,4 @@
---½Ç½À : ÇĞ±³ °ü¸®¸¦ À§ÇÏ¿© Å×ÀÌºí 2°³ ÀÌ»óÀ¸·Î db¸¦ ±¸ÃàÇÏ°í 3°³ ÀÌ»ó È°¿ëÇÒ ¼ö ÀÖ´Â case¸¦ ¸¸µå¼¼¿ä.
+--ì‹¤ìŠµ : í•™êµ ê´€ë¦¬ë¥¼ ìœ„í•˜ì—¬ í…Œì´ë¸” 2ê°œ ì´ìƒìœ¼ë¡œ dbë¥¼ êµ¬ì¶•í•˜ê³  3ê°œ ì´ìƒ í™œìš©í•  ìˆ˜ ìˆëŠ” caseë¥¼ ë§Œë“œì„¸ìš”.
 
 create table students(
     id number primary key,
@@ -9,32 +9,32 @@ create table students(
     class number(2) not null,
     address varchar2(150) not null,
     birth date,
-    eeif number(11) --ºñ»ó¿¬¶ô¸Á
+    eeif number(11) --ë¹„ìƒì—°ë½ë§
 );
 
 create table student_health(
     id number primary key,
     student_id number not null,
-    height number, -- Å°(cm)
-    weight number, -- ¸ö¹«°Ô(kg)
+    height number, -- í‚¤(cm)
+    weight number, -- ëª¸ë¬´ê²Œ(kg)
     sex char, --F / M
-    blood_type varchar2(2), -- Ç÷¾×Çü
-    vision_left number(3,2), -- ¿ŞÂÊ ½Ã·Â
-    vision_right number(3,2), -- ¿À¸¥ÂÊ ½Ã·Â
-    chronic varchar2(200), -- º´·Â
-    emergency_contact_name varchar2(30), -- ºñ»ó ¿¬¶ô¸Á ÀÌ¸§
-    emergency_contact_relationship varchar2(20), -- ºñ»ó ¿¬¶ô¸Á °ü°è
-    emergency_contact_phone number(11), -- ºñ»ó ¿¬¶ô¸Á ÀüÈ­¹øÈ£
+    blood_type varchar2(2), -- í˜ˆì•¡í˜•
+    vision_left number(3,2), -- ì™¼ìª½ ì‹œë ¥
+    vision_right number(3,2), -- ì˜¤ë¥¸ìª½ ì‹œë ¥
+    chronic varchar2(200), -- ë³‘ë ¥
+    emergency_contact_name varchar2(30), -- ë¹„ìƒ ì—°ë½ë§ ì´ë¦„
+    emergency_contact_relationship varchar2(20), -- ë¹„ìƒ ì—°ë½ë§ ê´€ê³„
+    emergency_contact_phone number(11), -- ë¹„ìƒ ì—°ë½ë§ ì „í™”ë²ˆí˜¸
     foreign key(student_id) references students(id) on delete cascade
 );
 
-create table student_records( --ÇĞ³âº° ÇĞÀûºÎ
+create table student_records( --í•™ë…„ë³„ í•™ì ë¶€
     id number primary key,
     student_id number not null,
-    student_grade number not null, --ÇĞ³â
-    student_rank number, --ÇĞ»ı ¼®Â÷
-    student_eval CLOB, --±³»ç Æò°¡
-    attendance_rate number(5,2), --Ãâ¼®·ü
+    student_grade number not null, --í•™ë…„
+    student_rank number, --í•™ìƒ ì„ì°¨
+    student_eval CLOB, --êµì‚¬ í‰ê°€
+    attendance_rate number(5,2), --ì¶œì„ë¥ 
     foreign key(student_id) references students(id) on delete cascade
 );
 
@@ -47,8 +47,8 @@ create table subject_records(
     id number primary key,
     subject_id number not null,
     student_id number not null,
-    exam varchar2(20) not null, --Áß°£ È¤Àº ±â¸»
-    score number default 0 not null, --¼ºÀû ±âº»°ª 0
+    exam varchar2(20) not null, --ì¤‘ê°„ í˜¹ì€ ê¸°ë§
+    score number default 0 not null, --ì„±ì  ê¸°ë³¸ê°’ 0
     foreign key(student_id) references students(id) on delete cascade,
     foreign key(subject_id) references subjects(id) on delete cascade
 );
@@ -56,18 +56,18 @@ create table subject_records(
 create table teachers(
     id number primary key,
     name varchar2(30) not null,
-    grade number, --´ã´ç ÇĞ³â
-    class number, --´ã´ç ¹İ
-    subject number, --´ã´ç°ú¸ñ
+    grade number, --ë‹´ë‹¹ í•™ë…„
+    class number, --ë‹´ë‹¹ ë°˜
+    subject number, --ë‹´ë‹¹ê³¼ëª©
     foreign key(subject) references subjects(id)
 );
 
 create table grade_cutoffs(
     id number primary key,
     subject_id number not null,
-    grade number not null, -- µî±Ş (¿¹: 1, 2, 3)
-    min_score number not null, -- ÃÖ¼Ò Á¡¼ö
-    max_score number not null, -- ÃÖ´ë Á¡¼ö
+    grade number not null, -- ë“±ê¸‰ (ì˜ˆ: 1, 2, 3)
+    min_score number not null, -- ìµœì†Œ ì ìˆ˜
+    max_score number not null, -- ìµœëŒ€ ì ìˆ˜
     foreign key(subject_id) references subjects(id) on delete cascade
 );
 
