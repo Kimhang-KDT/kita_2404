@@ -1,0 +1,147 @@
+body { 
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 20px;
+  background-color: #e0f7fa;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+}
+
+h1 {
+  color: #02c4cb;
+  position: relative;
+  top: 0px;
+  width: 100%;
+  text-align: center;
+  font-size: 48px;
+  margin: 5px;
+}
+
+form {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  background: #ffffff;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  max-width: 500px;
+  position: relative;
+}
+
+label {
+  font-weight: bold;
+}
+
+input[type="text"],
+input[type="date"],
+textarea {
+  width: calc(100% - 16px);
+  padding: 8px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type="submit"] {
+  background-color: #01ad9c;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  display: block;
+  margin: auto;
+  margin-right: 15px;
+  float: right;
+}
+
+input[type="submit"]:hover {
+  background-color: #015f56;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  width: 100%;
+  max-width: 500px;
+}
+
+li {
+  background: #fff;
+  margin: 10px 0;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+li div {
+  margin-bottom: 20px;
+}
+
+li .a_btn {
+  display: flex;
+  justify-content: flex-end;
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+}
+
+a {
+  margin-left: 10px;
+  color: #01ad9c;
+  text-decoration: none;
+  transition: text-decoration 0.3s ease;
+  text-align: center;
+  padding-bottom: 10px;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.centered {
+  text-align: center;
+}
+
+.custom-link {
+  color: #a19fa2;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.required {
+  color: red;
+  font-size: small;
+}
+
+a.a_btn_del,
+a.a_btn_edit {
+  display: inline-block;
+  padding: 5px 10px;
+  margin: 5px;
+  color: white;
+  border-radius: 4px;
+}
+
+a.a_btn_del {
+  background-color: rgb(151, 151, 151);
+}
+
+a.a_btn_edit {
+  background-color: #01ad9c;
+}
+
+a.a_btn_del:hover {
+  background-color: darkgray;
+}
+
+a.a_btn_edit:hover {
+  background-color: #015f56;
+}
