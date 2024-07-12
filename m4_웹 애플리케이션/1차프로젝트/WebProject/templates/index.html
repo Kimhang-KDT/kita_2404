@@ -24,50 +24,43 @@ Team 01 WebProject
           <thead>
             <tr>
               <th>Title</th>
-              <!--<th>Users</th>-->
-              <!--<th>Publisher</th>-->
-              <!--<th>Author</th>-->
-              <!--<th>Genre</th>-->
-              <!--<th>Ing</th>-->
-              <!--<th>Score</th>-->
-              <!--<th>viewCount</th>-->
+              <th>Users</th>
+              <th>Publisher</th>
+              <th>Author</th>
+              <th>Genre</th>
+              <th>Ing</th>
+              <th>Score</th>
+              <th>viewCount</th>
             </tr>
           </thead>
           <tfoot>
             <tr>
               <th>Title</th>
-              <!--<th>Users</th>-->
-              <!--<th>Publisher</th>-->
-              <!--<th>Author</th>-->
-              <!--<th>Genre</th>-->
-              <!--<th>Ing</th>-->
-              <!--<th>Score</th>-->
-              <!--<th>viewCount</th>-->
+              <th>Users</th>
+              <th>Publisher</th>
+              <th>Author</th>
+              <th>Genre</th>
+              <th>Ing</th>
+              <th>Score</th>
+              <th>viewCount</th>
             </tr>
           </tfoot>
           <tbody>
             {% for novel in novels %}
               <tr>
                 <td>{{ novel.title }}</td>
-              <!--  <td>{{ novel.user.users }}</td>-->
-              <!--  <td>{{ novel.publisher.publisher }}</td>-->
-              <!--  <td>{{ novel.author }}</td>-->
-              <!--  <td>{{ novel.genre.genre }}</td>-->
-              <!--  <td>{{ novel.ing }}</td>-->
-              <!--  <td>{{ novel.score }}</td>-->
-              <!--  <td>{{ novel.viewCount }}</td>-->
+                <td>{{ novel.user.users }}</td>
+                <td>{{ novel.publisher.publisher }}</td>
+                <td>{{ novel.author }}</td>
+                <td>{{ novel.genre.genre }}</td>
+                <td>{{ novel.ing }}</td>
+                <td>{{ novel.score }}</td>
+                <td>{{ novel.viewCount }}</td>
               </tr>
             {% endfor %}
           </tbody>
         </table>
       </div>
     </div>
-    {% if page > 1 %}
-      <a href="{{ url_for('home', page=page-1) }}">Previous</a>
-    {% endif %}
-    <span>Page {{ page }} of {{ total_pages }}</span>
-    {% if page < total_pages %}
-      <a href="{{ url_for('home', page=page+1) }}">Next</a>
-    {% endif %}
   </div>       
 {% endblock %}

@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block title %}
+Search - Team 01 WebProject
+{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="card shadow-lg border-0 rounded-lg mt-5">
+          <div class="card-header"><h3 class="text-center font-weight-light my-4">Search</h3></div>
+          <div class="card-body">
+            <form method="POST" action="{{ url_for('search') }}">
+              {{ form.hidden_tag() }}
+              <div class="form-group mb-3">
+                <label for="genre">Genre</label>
+                <div id="genre-buttons" class="genre-buttons">
+                  {% for genre in genres %}
+                    <button type="button" class="btn btn-outline-primary genre-button" data-genre-id="{{ genre.id }}">{{ genre.genre }}</button>
+                  {% endfor %}
+                </div>
+                {{ form.genre_id }}
+              </div>
+              <div class="form-group mb-3">
+                <label for="keywords">Keywords</label>
+                <div id="keywords-container"></div>
+              </div>
+              <button type="submit" class="btn btn-primary">Search</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.querySelectorAll('.genre-button').forEach(function(button) {
+      button.addEventListener('click', function() {
+        var genreId = this.getAttribute('data-genre-id');
+        document.querySelector('input[name="genre_id"]').value = genreId;
+
+        document.querySelectorAll('.genre-button').forEach(function(btn) {
+          btn.classList.remove('active');
+        });
+        this.classList.add('active');
+
+        if (genreId) {
+          fetch('/get_keywords/' + genreId)
+            .then(response => response.json())
+            .then(data => {
+              var keywordsContainer = document.getElementById('keywords-container');
+              keywordsContainer.innerHTML = '';  // 기존 내용 제거
+              data.forEach(keyword => {
+                var checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.name = 'keywords';
+                checkbox.value = keyword.keyword;
+                checkbox.id = 'keyword_' + keyword.id;
+
+                var label = document.createElement('label');
+                label.htmlFor = 'keyword_' + keyword.id;
+                label.appendChild(document.createTextNode(keyword.keyword));
+
+                var div = document.createElement('div');
+                div.className = 'form-check';
+                div.appendChild(checkbox);
+                div.appendChild(label);
+
+                keywordsContainer.appendChild(div);
+              });
+            });
+        } else {
+          document.getElementById('keywords-container').innerHTML = '';  // 장르 선택 해제 시 키워드 목록 비움
+        }
+      });
+    });
+  </script>
+
+  <style>
+    .genre-buttons .btn {
+      margin: 5px;  /* 버튼 사이 간격 조절 */
+    }
+  </style>
+{% endblock %}
