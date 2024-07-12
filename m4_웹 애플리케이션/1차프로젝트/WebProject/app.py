@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, jsonify, redirect, url_for, flash, session
 from flask_wtf.csrf import CSRFProtect
 from flask_migrate import Migrate
-from models import db, Keyword, Novels, Genre, Customer
+from models import db, Keyword, Novels, Genre, Customer, Images
 from werkzeug.security import generate_password_hash, check_password_hash
 from functools import wraps
 from form import LoginForm, RegistrationForm, SearchForm, ResultForm
@@ -35,11 +35,18 @@ def create_admin():
 
 @app.route('/')
 def home():
+  if "customer_id" not in session:
+    return redirect(url_for('login'))
+  
+  return render_template('home.html')
+
+@app.route('/entire')
+def entire():
   try:
     if "customer_id" not in session:
       return redirect(url_for('login'))
     novels = Novels.query.all()
-    return render_template('index.html', novels=novels)
+    return render_template('entire.html', novels=novels)
   except Exception as e:
     logger.error(f'Error occurred: {e}')
     return str(e)
@@ -92,32 +99,70 @@ def admin():
 
 @app.route('/search', methods=['GET', 'POST'])
 def search():
-    if "customer_id" not in session:
-        return redirect(url_for('login'))
+  if "customer_id" not in session:
+    return redirect(url_for('login'))
 
-    form = SearchForm()
-    genres = Genre.query.all()  # 장르 데이터 가져오기
+  form = SearchForm()
+  genres = Genre.query.all()
 
-    if form.validate_on_submit():
-        genre_id = form.genre_id.data
-        genre_name = next((g.genre for g in genres if g.id == int(genre_id)), 'Unknown')
-        keywords = request.form.getlist('keywords')
-        return redirect(url_for('result', genre_id=genre_id, genre_name=genre_name, keywords=','.join(keywords)))
+  if form.validate_on_submit():
+    genre_id = form.genre_id.data
+    genre_name = next((g.genre for g in genres if g.id == int(genre_id)), 'Unknown')
+    keywords = request.form.getlist('keywords')
+    return redirect(url_for('result', genre_id=genre_id, genre_name=genre_name, keywords=','.join(keywords)))
 
-    return render_template('search.html', form=form, genres=genres)
+  return render_template('search.html', form=form, genres=genres)
 
 @app.route('/get_keywords/<genre_id>', methods=['GET'])
 def get_keywords(genre_id):
-    keywords = Keyword.query.filter_by(genre_id=genre_id).all()
-    keywords_list = [{'id': k.id, 'keyword': k.keyword} for k in keywords]
-    return jsonify(keywords_list)
+  if "customer_id" not in session:
+    return redirect(url_for('login'))
+  
+  keywords = Keyword.query.filter_by(genre_id=genre_id).all()
+  keywords_list = [{'id': k.id, 'keyword': k.keyword} for k in keywords]
+  return jsonify(keywords_list)
 
-@app.route('/result', methods=['GET'])
+@app.route('/result', methods=['GET', 'POST'])
 def result():
-    genre_id = request.args.get('genre_id')
-    genre_name = request.args.get('genre_name')
-    keywords = request.args.get('keywords').split(',')
-    return render_template('result.html', genre_id=genre_id, genre_name=genre_name, keywords=keywords)
+  if "customer_id" not in session:
+    return redirect(url_for('login'))
+  
+  genre_id = request.args.get('genre_id')
+  genre_name = request.args.get('genre_name')
+  keywords = request.args.get('keywords').split(',')
+
+  # Novels 테이블에서 해당 장르와 키워드를 모두 포함하는 소설 검색
+  novels = Novels.query.filter(
+    Novels.genre_id == genre_id,
+    *[Novels.keywords.contains(keyword) for keyword in keywords]
+  ).all()
+
+  # Images 테이블과 novels를 매칭
+  novels_with_images = []
+  for novel in novels:
+    image = Images.query.filter_by(novel_id=novel.id).first()
+    novels_with_images.append({
+      'novel': novel,
+      'image': image
+    })
+
+  return render_template('result.html', genre_id=genre_id, genre_name=genre_name, keywords=keywords, novels=novels_with_images)
+
+@app.route('/detail/<int:novel_id>')
+def detail(novel_id):
+  if "customer_id" not in session:
+    return redirect(url_for('login'))
+
+  novel = Novels.query.get_or_404(novel_id)
+  image = Images.query.filter_by(novel_id=novel.id).first()
+  return render_template('detail.html', novel=novel, image=image)
+
+@app.route('/guide')
+def guide():
+  if "customer_id" not in session:
+    return redirect(url_for('login'))
+  
+  return render_template('guide.html')
 
 if __name__ == '__main__':
   app.run(debug=True, port=5001, use_reloader=False)

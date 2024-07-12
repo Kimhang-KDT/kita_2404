@@ -49,6 +49,18 @@ class Genre(db.Model):
   id = db.Column(db.Integer, primary_key=True)
   genre = db.Column(db.String(100), nullable=False)
   novels = db.relationship('Novels', backref='genre', lazy=True)
+
+class Images(db.Model):
+  __tablename__ = 'images'
+  __table_args__ = {'extend_existing': True}
+  id = db.Column(db.Integer, primary_key=True)
+  src = db.Column(db.String(255), nullable=False)
+  novel_id = db.Column(db.Integer, db.ForeignKey('novels.id'), nullable=False)
+
+  novel = db.relationship('Novels', backref=db.backref('images', lazy=True))
+
+  def __repr__(self):
+      return f'<Image {self.src}>'
   
 class Novels(db.Model):
   __tablename__ = 'novels'
@@ -70,4 +82,4 @@ class Novels(db.Model):
   keywords = db.Column(db.JSON, nullable=False)
 
   def __repr__(self):
-      return f'<Novel {self.title} by {self.author}>'
+    return f'<Novel {self.title} by {self.author}>'

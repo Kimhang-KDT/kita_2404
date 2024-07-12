@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block title %}
+Team 01 WebProject
+{% endblock %}
+
+{% block content %}
+  <div class="container-fluid px-4">
+    <h1 class="mt-4">전체 데이터</h1>
+    <div class="card mb-4">
+      <div class="card-header">
+        <i class="fas fa-table me-1"></i>
+        Novels DataTable
+      </div>
+      <div class="card-body">
+        <table id="datatablesSimple">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Users</th>
+              <th>Publisher</th>
+              <th>Author</th>
+              <th>Genre</th>
+              <th>Ing</th>
+              <th>Score</th>
+              <th>viewCount</th>
+            </tr>
+          </thead>
+          <tfoot>
+            <tr>
+              <th>Title</th>
+              <th>Users</th>
+              <th>Publisher</th>
+              <th>Author</th>
+              <th>Genre</th>
+              <th>Ing</th>
+              <th>Score</th>
+              <th>viewCount</th>
+            </tr>
+          </tfoot>
+          <tbody>
+            {% for novel in novels %}
+              <tr>
+                <td>{{ novel.title }}</td>
+                <td>{{ novel.user.users }}</td>
+                <td>{{ novel.publisher.publisher }}</td>
+                <td>{{ novel.author }}</td>
+                <td>{{ novel.genre.genre }}</td>
+                <td>{{ novel.ing }}</td>
+                <td>{{ novel.score }}</td>
+                <td>{{ novel.viewCount }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>       
+{% endblock %}

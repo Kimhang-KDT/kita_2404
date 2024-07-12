@@ -24,7 +24,7 @@ Search - Team 01 WebProject
               </div>
               <div class="form-group mb-3">
                 <label for="keywords">Keywords</label>
-                <div id="keywords-container"></div>
+                <div id="keywords-container" class="row"></div>
               </div>
               <button type="submit" class="btn btn-primary">Search</button>
             </form>
@@ -51,14 +51,22 @@ Search - Team 01 WebProject
             .then(data => {
               var keywordsContainer = document.getElementById('keywords-container');
               keywordsContainer.innerHTML = '';  // 기존 내용 제거
-              data.forEach(keyword => {
+              var rowDiv = null;
+              data.forEach((keyword, index) => {
+                if (index % 4 === 0) {
+                  rowDiv = document.createElement('div');
+                  rowDiv.className = 'col-md-3 mb-3';  // 한 줄에 4개의 항목을 표시하기 위해 col-md-3 사용
+                  keywordsContainer.appendChild(rowDiv);
+                }
                 var checkbox = document.createElement('input');
+                checkbox.className = 'form-check-input';
                 checkbox.type = 'checkbox';
                 checkbox.name = 'keywords';
                 checkbox.value = keyword.keyword;
                 checkbox.id = 'keyword_' + keyword.id;
 
                 var label = document.createElement('label');
+                label.className = 'form-check-label';
                 label.htmlFor = 'keyword_' + keyword.id;
                 label.appendChild(document.createTextNode(keyword.keyword));
 
@@ -67,11 +75,11 @@ Search - Team 01 WebProject
                 div.appendChild(checkbox);
                 div.appendChild(label);
 
-                keywordsContainer.appendChild(div);
+                rowDiv.appendChild(div);
               });
             });
         } else {
-          document.getElementById('keywords-container').innerHTML = '';  // 장르 선택 해제 시 키워드 목록 비움
+          document.getElementById('keywords-container').innerHTML = '';
         }
       });
     });
@@ -79,7 +87,7 @@ Search - Team 01 WebProject
 
   <style>
     .genre-buttons .btn {
-      margin: 5px;  /* 버튼 사이 간격 조절 */
+      margin: 5px;
     }
   </style>
 {% endblock %}
