@@ -1,3 +1,3 @@
 SECRET_KEY = 'a5ff0c87d08d5c472a7053192344f1fa42a7f7c7ff4741f5'
-SQLALCHEMY_DATABASE_URI = 'mysql://root:mysql@localhost:3306/team1'
+SQLALCHEMY_DATABASE_URI = 'mysql://hang:hang@localhost:3306/team1'
 SQLALCHEMY_TRACK_MODIFICATIONS = False

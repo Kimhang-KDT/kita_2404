@@ -611,6 +611,13 @@ progress {
   height: auto;
 }
 
+.img-sm {
+  float: left;
+  margin: 0.25em;
+  max-width: 25%;
+  max-height: 25%;
+}
+
 .figure {
   display: inline-block;
 }
@@ -4165,6 +4172,10 @@ textarea.form-control-lg {
   --bs-navbar-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.55%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
 }
 
+.dropdown-header {
+  cursor: pointer;
+}
+
 .card {
   --bs-card-spacer-y: 1rem;
   --bs-card-spacer-x: 1rem;
@@ -7323,7 +7334,7 @@ textarea.form-control-lg {
 
 .h-auto {
   height: auto !important;
-}
+}z
 
 .mh-100 {
   max-height: 100% !important;
@@ -10949,6 +10960,23 @@ body {
 
 .img-error {
   max-width: 20rem;
+}
+
+.img-card {
+  width: 102px;
+  height: 158px;
+}
+
+.label-overlay {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  background-color: white;
+  color: black;
+  border-radius: 10px;
+  padding: 2px 6px;
+  font-weight: bold;
+  font-size: 0.8em;
 }
 
 .nav .nav-link .sb-nav-link-icon,

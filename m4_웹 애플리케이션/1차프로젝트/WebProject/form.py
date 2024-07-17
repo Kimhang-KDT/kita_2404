@@ -1,16 +1,31 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, TextAreaField, DateField, SubmitField, BooleanField, PasswordField, SelectField, HiddenField
+from wtforms import StringField, SubmitField, BooleanField, PasswordField, HiddenField
 from wtforms.validators import DataRequired, Length, EqualTo
+
+class DebutForm(FlaskForm):
+  genre_id = HiddenField('Genre ID', validators=[DataRequired()])
+  genre_name = HiddenField('Genre Name', validators=[DataRequired()])
+  keywords = HiddenField('Keywords', validators=[DataRequired()])
+  submit = SubmitField('Search')
+
+class NovelsForm(FlaskForm):
+  genre_id = HiddenField('Genre ID', validators=[DataRequired()])
+  novel_ids = HiddenField('Novel IDs', validators=[DataRequired()])
+  genre_name = HiddenField('Genre Name', validators=[DataRequired()])
+  keywords = HiddenField('Keywords', validators=[DataRequired()])
+  submit = SubmitField('Submit')
 
 class SearchForm(FlaskForm):
   genre_id = HiddenField('Genre ID', validators=[DataRequired()])
-  keywords = StringField('Keywords')
+  genre_name = HiddenField('Genre Name', validators=[DataRequired()])
+  keywords = HiddenField('Keywords', validators=[DataRequired()])
   submit = SubmitField('Search')
 
 class ResultForm(FlaskForm):
   genre_id = HiddenField('Genre ID', validators=[DataRequired()])
+  novel_ids = HiddenField('Novel IDs', validators=[DataRequired()])
   genre_name = HiddenField('Genre Name', validators=[DataRequired()])
-  keywords = StringField('Keywords')
+  keywords = HiddenField('Keywords', validators=[DataRequired()])
   submit = SubmitField('Submit')
 
 class LoginForm(FlaskForm):
