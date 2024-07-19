@@ -19,65 +19,65 @@
   - 필요한 데이터 크롤링 하여 전처리.
   - 조회수와 리뷰수를 합하여 '인기도' 파생 변수 생성, 조회수와 편당 가격 (* 78.8%)을 합하여 '예상 수익' 파생 변수 생성
 
-# 웹 구조
-│  app.py
-│  config.py
-│  form.py
-│  generate_secret_key.py        
-│  models.py
-│  README.md
-│  utils.py
-│
-├─static
-│  ├─assets
-│  │  ├─demo
-│  │  │      carousel-banner.js
-│  │  │      datatables-demo.js
-│  │  │      group-popularity-chart.js
-│  │  │      group-revenue-scatter-chart.js
-│  │  │      keywords-comparison-chart.js
-│  │  │      keywords-important-pie.js
-│  │  │      keywords-rank-line-chart.js
-│  │  │      select-genre-keywords.js
-│  │  │
-│  │  └─img
-│  │          guide.png
-│  │          H2BD2.jpg
-│  │          naver.png
-│  │          readytogo.png
-│  │          stage.png
+# 웹 구조\
+│  app.py\
+│  config.py\
+│  form.py\
+│  generate_secret_key.py     \   
+│  models.py\
+│  README.md\
+│  utils.py\
+│\
+├─static\
+│  ├─assets\
+│  │  ├─demo\
+│  │  │      carousel-banner.js\
+│  │  │      datatables-demo.js\
+│  │  │      group-popularity-chart.js\
+│  │  │      group-revenue-scatter-chart.js\
+│  │  │      keywords-comparison-chart.js\
+│  │  │      keywords-important-pie.js\
+│  │  │      keywords-rank-line-chart.js\
+│  │  │      select-genre-keywords.js\
+│  │  │\
+│  │  └─img\
+│  │          guide.png\
+│  │          H2BD2.jpg\
+│  │          naver.png\
+│  │          readytogo.png\
+│  │          stage.png\
+│  │\
+│  ├─css\
+│  │      styles.css\
 │  │
-│  ├─css
-│  │      styles.css
-│  │
-│  └─js
-│          datatables-simple-demo.js
-│          scripts.js
-│
-├─templates
-│  │  base.html
-│  │  community.html
-│  │  guide.html
-│  │  home.html
-│  │  notices.html
-│  │  publishers.html
-│  │
-│  ├─analysis
-│  │      genre_analysis.html
-│  │      million_analysis.html
-│  │      publisher_analysis.html
-│  │      
-│  ├─auth
-│  │      login.html
-│  │      login_base.html
-│  │      register.html
-│  │
-│  └─debuts
-│          debut.html
-│          debut_analysis.html
-│          debut_analysis_single.html
-│          novel_not_found.html
-│          _macro.html
+│  └─js\
+│          datatables-simple-demo.js\
+│          scripts.js\
+│\
+├─templates\
+│  │  base.html\
+│  │  community.html\
+│  │  guide.html\
+│  │  home.html\
+│  │  notices.html\
+│  │  publishers.html\
+│  │\
+│  ├─analysis\
+│  │      genre_analysis.html\
+│  │      million_analysis.html\
+│  │      publisher_analysis.html\
+│  │      \
+│  ├─auth\
+│  │      login.html\
+│  │      login_base.html\
+│  │      register.html\
+│  │\
+│  └─debuts\
+│          debut.html\
+│          debut_analysis.html\
+│          debut_analysis_single.html\
+│          novel_not_found.html\
+│          _macro.html\
 
 # 웹구현
   - 웹 구성
