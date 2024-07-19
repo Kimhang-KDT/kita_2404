@@ -1,59 +1,57 @@
 {% extends "base.html" %}
 
 {% block title %}
-Team 01 WebProject
+Notice Board - Team 01 WebProject
 {% endblock %}
 
 {% block content %}
-  <div class="container-fluid px-4">
-    <h1 class="mt-4">전체 데이터</h1>
-    <div class="card mb-4">
-      <div class="card-header">
-        <i class="fas fa-table me-1"></i>
-        Novels DataTable
-      </div>
-      <div class="card-body">
-        <table id="datatablesSimple">
-          <thead>
-            <tr>
-              <th>Title</th>
-              <th>Users</th>
-              <th>Publisher</th>
-              <th>Author</th>
-              <th>Genre</th>
-              <th>Ing</th>
-              <th>Score</th>
-              <th>viewCount</th>
-            </tr>
-          </thead>
-          <tfoot>
-            <tr>
-              <th>Title</th>
-              <th>Users</th>
-              <th>Publisher</th>
-              <th>Author</th>
-              <th>Genre</th>
-              <th>Ing</th>
-              <th>Score</th>
-              <th>viewCount</th>
-            </tr>
-          </tfoot>
-          <tbody>
-            {% for novel in novels %}
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-12">
+      <div class="card shadow-lg border-0 rounded-lg mt-2">
+        <div class="card-header"><h3 class="text-center font-weight-light my-2">공지사항 및 뉴스</h3></div>
+        <div class="card-body">
+          <table class="table table-hover">
+            <thead>
               <tr>
-                <td>{{ novel.title }}</td>
-                <td>{{ novel.user.users }}</td>
-                <td>{{ novel.publisher.publisher }}</td>
-                <td>{{ novel.author }}</td>
-                <td>{{ novel.genre.genre }}</td>
-                <td>{{ novel.ing }}</td>
-                <td>{{ novel.score }}</td>
-                <td>{{ novel.viewCount }}</td>
+                <th scope="col">#</th>
+                <th scope="col">제목</th>
+                <th scope="col">작성자</th>
+                <th scope="col">작성일</th>
               </tr>
-            {% endfor %}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              <!-- 더미 데이터 시작 -->
+              <tr>
+                <th scope="row">1</th>
+                <td><a href="#">공지사항 예시 제목 1</a></td>
+                <td>관리자</td>
+                <td>2024-07-01</td>
+              </tr>
+              <tr>
+                <th scope="row">2</th>
+                <td><a href="#">뉴스 예시 제목 2</a></td>
+                <td>기자</td>
+                <td>2024-07-02</td>
+              </tr>
+              <tr>
+                <th scope="row">3</th>
+                <td><a href="#">공지사항 예시 제목 3</a></td>
+                <td>관리자</td>
+                <td>2024-07-03</td>
+              </tr>
+              <tr>
+                <th scope="row">4</th>
+                <td><a href="#">뉴스 예시 제목 4</a></td>
+                <td>기자</td>
+                <td>2024-07-04</td>
+              </tr>
+              <!-- 더미 데이터 끝 -->
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
-  </div>       
+  </div>
+</div>
 {% endblock %}

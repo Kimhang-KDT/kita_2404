@@ -1,11 +1,12 @@
 from flask import Flask, render_template, request, jsonify, redirect, url_for, flash, session
 from flask_wtf.csrf import CSRFProtect
 from flask_migrate import Migrate
-from models import db, Keyword, Novels, Genre, Customer, Images
+from models import db, Keyword, Genre, Customer
 from werkzeug.security import generate_password_hash, check_password_hash
-from form import LoginForm, RegistrationForm, SearchForm, ResultForm, DebutForm, NovelsForm
-from utils import create_analysis_summary, get_keywords_10rank_by_genre, get_keywords_importance, get_top100_novels
+from form import LoginForm, RegistrationForm, DebutForm
+from utils import *
 import logging
+import json
 
 app = Flask(__name__)
 app.config.from_pyfile("config.py")
@@ -97,25 +98,8 @@ def logout():
   session.clear()
   flash('You have been logged out.', 'success')
   return redirect(url_for('login'))
-
-#@app.route('/admin')
-#def admin():
-#  if "customer_id" not in session or not session.get("is_admin"):
-#    return redirect(url_for('login'))
-#  customer = Customer.query.all()
-#  return render_template('admin.html', customer=customer)
-
-@app.route('/entire')
-def entire():
-  try:
-    if "customer_id" not in session:
-      return redirect(url_for('login'))
-    novels = Novels.query.all()
-    return render_template('entire.html', novels=novels)
-  except Exception as e:
-    logger.error(f'Error occurred: {e}')
-    return str(e)
   
+# 키워드 매칭 파트
 @app.route('/debut', methods=['GET', 'POST'])
 def debut():
   if "customer_id" not in session:
@@ -125,71 +109,81 @@ def debut():
   genres = Genre.query.all()
 
   if form.validate_on_submit():
-    genre_id = form.genre_id.data
-    genre_name = next((g.genre for g in genres if g.id == int(genre_id)), 'Unknown')
-    keywords = request.form.getlist('keywords')
+    genre_id, genre_name, keywords = get_data_from_form(form)
+
     return redirect(url_for('debut_analysis', genre_id=genre_id, genre_name=genre_name, keywords=','.join(keywords)))
 
   return render_template('debuts/debut.html', form=form, genres=genres)
   
+# 상세 분석 정보 파트
 @app.route('/debut/analysis', methods=['GET', 'POST'])
 def debut_analysis():
   if "customer_id" not in session:
-      return redirect(url_for('login'))
+    return redirect(url_for('login'))
 
-  form = NovelsForm()
+  genre_id, genre_name, keywords = get_data_from_request(request)
+  novel_data = get_novel_data_by_keywords(genre_id, keywords)
+  keywords = keywords.split(',')
 
-  if form.validate_on_submit():
-    novel_ids = form.novel_ids.data
-    genre_id = form.genre_id.data
-    genre_name = form.genre_name.data
-    keywords = form.keywords.data
-    
-    return redirect(url_for('debuts/debut_direction', novel_ids=novel_ids, genre_name=genre_name, genre_id=genre_id, keywords=keywords))
-
-  genre_id = request.form.get('genre_id')
-  genre_name = request.form.get('genre_name')
-  keywords = request.form.get('keywords')
-
-  user_data = {'genre_id': genre_id, 'genre_name': genre_name, 'keywords': keywords}
-
-  novels = Novels.query.filter(
-    Novels.genre_id == genre_id,
-    *[Novels.keywords.contains(keyword) for keyword in keywords]
-  ).all()
-
-  filtered_novels = [novel for novel in novels if (novel.viewCount + novel.reviewCount) / 2 > 1000000]
-
-  for novel in filtered_novels:
-    image = Images.query.filter_by(novel_id=novel.id).first()
-    novel.src = image.src if image else None
-
-  keywords_rank = get_keywords_10rank_by_genre(genre_id, keywords)
+  # 장르 인기 키워드와 선택 키워드 비교
+  keywords_rank = get_top_10_keywords_by_genre(genre_id, keywords)
+  # 선택한 키워드의 장르내 비중
   keywords_importance = get_keywords_importance(genre_id, keywords) or []
 
-  form.novel_ids.data = ','.join([str(novel.id) for novel in filtered_novels])
+  # 상위 10개 소설 키워드 가져오기 - 그중 최빈도수 5개 가져오기
+  top_10_novels = get_top_10_novels(genre_id)
+  top_novels_keywords = get_all_keywords(top_10_novels)
+  top_5_keywords, top_5_mck = get_top_num_keywords(top_novels_keywords, num=5)
 
-  data = {'novels': filtered_novels, 'keywords_rank': keywords_rank, 'keywords_importance': keywords_importance, 'user_data': user_data}
+  # 선택한 키워드별 인기 작품 및 평균 데이터
+  each_keywords, most_common_publishers = get_novels_data_by_each_keyword(genre_id, keywords)
+  analysis = get_top_10_novels_analysis(top_10_novels)
+  most_common_keyword_rank = next((index + 1 for index, (kw, count) in enumerate(keywords_rank) if kw == keywords_importance['most_common_keyword']), None)
+  top_5_mck_rank = next((index + 1 for index, (kw, count) in enumerate(keywords_rank) if kw == top_5_mck), None)
+  avg_data = get_avg_data_by_genre(genre_id)
 
-  return render_template('debuts/debut_analysis.html', form=form, data=data)
+  data = {
+    'top_10_novels': top_10_novels,
+    'genre_id': genre_id,
+    'genre_name': genre_name,
+    'keywords': keywords,
+    'keywords_rank': keywords_rank,
+    'keywords_importance': keywords_importance,
+    'top_5_keywords': top_5_keywords,
+    'top_5_mck':top_5_mck,
+    'each_keywords':each_keywords, 
+    'analysis':analysis, 
+    'most_common_publishers':most_common_publishers,
+    'most_common_keyword':keywords_importance['most_common_keyword'],
+    'most_common_keyword_rank':most_common_keyword_rank,
+    'top_5_mck_rank':top_5_mck_rank,
+    'avg_data':avg_data
+  }
   
-@app.route('/debut/direction')
-def debut_direction():
-  if "customer_id" not in session:
-    return redirect(url_for('login'))
-  
-  novel_ids = request.form.get('novel_ids')
-  genre_id = request.form.get('genre_id')
-  keywords = request.form.get('keywords')
-  genre_name = request.form.get('genre_name')
-  if novel_ids:
-    novel_ids = novel_ids.split(',')
-  
-  analysis_summary = create_analysis_summary(novel_ids, keywords)
-  keywords_importance = get_keywords_importance(genre_id, keywords)
+  # novel이 0개일 때
+  if not novel_data:
+    flash("선택하신 키워드 관련 소설이 존재하지 않습니다. 카테고리를 제외한 분석 결과를 제공합니다", "info")
+    return render_template('debuts/novel_not_found.html', data=data)
 
-  return render_template('debuts/debut_direction.html', keywords_importance=keywords_importance, keywords=keywords, genre_name=genre_name, analysis_summary=analysis_summary)
+  # novel이 1개일 때
+  if len(novel_data) == 1:
+    novel = novel_data[0]
+    data['novel'] = novel_to_dict(novel)
+
+    #조회수 별 군집화하여 평균 데이터 가져오기
+    avg_data_by_range = get_avg_data_by_viewcount_range(genre_id, novel.viewCount)
+
+    flash("선택하신 키워드 관련 소설이 1개 존재합니다. 해당 작품의 분석 결과만 제공됩니다", "info")
+    return render_template('debuts/debut_analysis_single.html',
+      data=data, avg_data_by_range=avg_data_by_range)
+
+  # novel이 2개 이상일 때
+  novels = novels_to_dict(novel_data)
+  data['novels'] = novels
+  novels_json = json.dumps(novels)
   
+  return render_template('debuts/debut_analysis.html', data=data, novels_json=novels_json)
+
 @app.route('/publishers', methods=['GET', 'POST'])
 def publishers():
   if "customer_id" not in session:
@@ -228,22 +222,6 @@ def notices():
   
   return render_template('notices.html')
 
-@app.route('/search', methods=['GET', 'POST'])
-def search():
-  if "customer_id" not in session:
-    return redirect(url_for('login'))
-
-  form = SearchForm()
-  genres = Genre.query.all()
-
-  if form.validate_on_submit():
-    genre_id = form.genre_id.data
-    genre_name = next((g.genre for g in genres if g.id == int(genre_id)), 'Unknown')
-    keywords = request.form.getlist('keywords')
-    return redirect(url_for('result', genre_id=genre_id, genre_name=genre_name, keywords=','.join(keywords)))
-
-  return render_template('search.html', form=form, genres=genres)
-
 @app.route('/get_keywords/<genre_id>', methods=['GET'])
 def get_keywords(genre_id):
   if "customer_id" not in session:
@@ -252,65 +230,6 @@ def get_keywords(genre_id):
   keywords = Keyword.query.filter_by(genre_id=genre_id).all()
   keywords_list = [{'id': k.id, 'keyword': k.keyword} for k in keywords]
   return jsonify(keywords_list)
-
-@app.route('/result', methods=['POST'])
-def result():
-  if "customer_id" not in session:
-    return redirect(url_for('login'))
-
-  form = ResultForm()
-
-  if form.validate_on_submit():
-    novel_ids = form.novel_ids.data
-    genre_id = form.genre_id.data
-    genre_name = form.genre_name.data
-    keywords = form.keywords.data
-    
-    return redirect(url_for('detail', novel_ids=novel_ids, genre_name=genre_name, genre_id=genre_id, keywords=keywords))
-
-  genre_id = request.form.get('genre_id')
-  genre_name = request.form.get('genre_name')
-  keywords = request.form.get('keywords')
-  if keywords:
-    keywords = keywords.split(',')
-
-  novels = Novels.query.filter(
-    Novels.genre_id == genre_id,
-    *[Novels.keywords.contains(keyword) for keyword in keywords]
-  ).all()
-
-  for novel in novels:
-    image = Images.query.filter_by(novel_id=novel.id).first()
-    novel.src = image.src if image else None
-
-  keywords_importance = get_keywords_importance(genre_id, keywords)
-
-  form.novel_ids.data = ','.join([str(novel.id) for novel in novels])
-
-  data = {'novels':novels, 'keywords_importance':keywords_importance}
-
-  return render_template('result.html', form=form, data=data)
-
-@app.context_processor
-def utility_processor():
-  return dict(enumerate=enumerate)
-
-@app.route('/detail', methods=['POST'])
-def detail():
-  if "customer_id" not in session:
-    return redirect(url_for('login'))
-
-  novel_ids = request.form.get('novel_ids')
-  genre_id = request.form.get('genre_id')
-  keywords = request.form.get('keywords')
-  genre_name = request.form.get('genre_name')
-  if novel_ids:
-    novel_ids = novel_ids.split(',')
-  
-  analysis_summary = create_analysis_summary(novel_ids, keywords)
-  keywords_importance = get_keywords_importance(genre_id, keywords)
-
-  return render_template('detail.html', keywords_importance=keywords_importance, keywords=keywords, genre_name=genre_name, analysis_summary=analysis_summary)
 
 if __name__ == '__main__':
   app.run(debug=True, port=5001, use_reloader=False)

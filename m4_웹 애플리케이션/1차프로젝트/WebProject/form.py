@@ -8,26 +8,6 @@ class DebutForm(FlaskForm):
   keywords = HiddenField('Keywords', validators=[DataRequired()])
   submit = SubmitField('Search')
 
-class NovelsForm(FlaskForm):
-  genre_id = HiddenField('Genre ID', validators=[DataRequired()])
-  novel_ids = HiddenField('Novel IDs', validators=[DataRequired()])
-  genre_name = HiddenField('Genre Name', validators=[DataRequired()])
-  keywords = HiddenField('Keywords', validators=[DataRequired()])
-  submit = SubmitField('Submit')
-
-class SearchForm(FlaskForm):
-  genre_id = HiddenField('Genre ID', validators=[DataRequired()])
-  genre_name = HiddenField('Genre Name', validators=[DataRequired()])
-  keywords = HiddenField('Keywords', validators=[DataRequired()])
-  submit = SubmitField('Search')
-
-class ResultForm(FlaskForm):
-  genre_id = HiddenField('Genre ID', validators=[DataRequired()])
-  novel_ids = HiddenField('Novel IDs', validators=[DataRequired()])
-  genre_name = HiddenField('Genre Name', validators=[DataRequired()])
-  keywords = HiddenField('Keywords', validators=[DataRequired()])
-  submit = SubmitField('Submit')
-
 class LoginForm(FlaskForm):
   customername = StringField('Customer Name', validators=[DataRequired()])
   password = PasswordField('Password', validators=[DataRequired()])

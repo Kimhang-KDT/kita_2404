@@ -38,6 +38,17 @@ document.addEventListener('DOMContentLoaded', function() {
           responsive: true,
           legend: {
               position: 'top',
+          },
+          tooltips: {
+              callbacks: {
+                  label: function(tooltipItem, data) {
+                      const dataset = data.datasets[tooltipItem.datasetIndex];
+                      const total = dataset.data.reduce((acc, value) => acc + value, 0);
+                      const currentValue = dataset.data[tooltipItem.index];
+                      const percentage = ((currentValue / total) * 100).toFixed(2);
+                      return data.labels[tooltipItem.index] + ': ' + percentage + '%';
+                  }
+              }
           }
       }
   });
