@@ -19,11 +19,11 @@
   - 필요한 데이터 크롤링 하여 전처리.
   - 조회수와 리뷰수를 합하여 '인기도' 파생 변수 생성, 조회수와 편당 가격 (* 78.8%)을 합하여 '예상 수익' 파생 변수 생성
 
-# 웹 구조\
+# 웹 구조
 │  app.py\
 │  config.py\
 │  form.py\
-│  generate_secret_key.py     \   
+│  generate_secret_key.py\
 │  models.py\
 │  README.md\
 │  utils.py\
