@@ -77,7 +77,7 @@
 │          debut_analysis.html\
 │          debut_analysis_single.html\
 │          novel_not_found.html\
-│          _macro.html\
+│          _macro.html
 
 # 웹구현
   - 웹 구성
