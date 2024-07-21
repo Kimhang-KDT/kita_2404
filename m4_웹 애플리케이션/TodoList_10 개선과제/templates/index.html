@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="container">
+    {% for task in tasks %}
+    <div class="row justify-content-center mt-3">
+        <div class="col-md-11">
+            <div class="h-100 p-5 border rounded-3 custom-box">
+            <div class="container-fluid py-5">
+                <h5>{{ task.title }}</h5>
+                <p>{{ task.contents }}</p>
+                {% if task.completion_date %}
+                    <p class="text-end">완료일: {{ task.completion_date.strftime('%Y-%m-%d') }}</p>
+                    {% if task.days_remaining >= 0 %}
+                    <p class="text-success text-end">{{ task.status }}</p>
+                    {% elif task.days_remaining == 0 %}
+                    <p class="text-success text-end">{{ task.status }}</p>
+                    {% else %}
+                    <p class="text-danger text-end">{{ task.status }}</p>
+                    {% endif %}
+                    {% else %}
+                    {% if task.days_remaining >= 0 %}
+                    <p class="text-success text-end">{{ task.status }}</p>
+                    {% else %}
+                    <p class="text-danger text-end">{{ task.status }}</p>
+                    {% endif %}
+                {% endif %}
+            </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}
