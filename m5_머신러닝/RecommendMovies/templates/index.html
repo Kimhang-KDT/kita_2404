@@ -3,11 +3,33 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-  <div class="jumbotron">
-      <h1 class="display-4">Hello, Flask!</h1>
-      <p class="lead">This is a simple Flask application with Bootstrap.</p>
-      <hr class="my-4">
-      <p>It uses Bootstrap for styling and includes a basic Flask setup.</p>
-      <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+  <div class="d-flex justify-content-center align-items-center vh-100">
+    <div class="table-responsive">
+      <table id="datatablesSimple1" class="table table-striped table-bordered">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>영화 제목</th>
+            <th>영화 평점</th>
+          </tr>
+        </thead>
+        <tfoot>
+          <tr>
+            <th>ID</th>
+            <th>영화 제목</th>
+            <th>영화 평점</th>
+          </tr>
+        </tfoot>
+        <tbody>
+          {% for movie in top_movies %}
+            <tr>
+              <td>{{ movie.movie_id }}</td>
+              <td>{{ movie.title }}</td>
+              <td>{{ movie.rating }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
   </div>
 {% endblock %}
