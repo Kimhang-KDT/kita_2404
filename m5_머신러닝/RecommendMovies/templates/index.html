@@ -4,32 +4,11 @@
 
 {% block content %}
   <div class="d-flex justify-content-center align-items-center vh-100">
-    <div class="table-responsive">
-      <table id="datatablesSimple1" class="table table-striped table-bordered">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>영화 제목</th>
-            <th>영화 평점</th>
-          </tr>
-        </thead>
-        <tfoot>
-          <tr>
-            <th>ID</th>
-            <th>영화 제목</th>
-            <th>영화 평점</th>
-          </tr>
-        </tfoot>
-        <tbody>
-          {% for movie in top_movies %}
-            <tr>
-              <td>{{ movie.movie_id }}</td>
-              <td>{{ movie.title }}</td>
-              <td>{{ movie.rating }}</td>
-            </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-    </div>
+    <h2>Enter User ID to get Movie Recommendations</h2>
+    <form action="{{ url_for('recommend') }}" method="post">
+      <label for="user_id">User ID:</label>
+      <input type="number" id="user_id" name="user_id" required>
+      <button type="submit">Get Recommendations</button>
+    </form>
   </div>
 {% endblock %}
