@@ -9,7 +9,7 @@ app.secret_key = SECRET_KEY
 @app.route('/')
 def index():
     # 벡터 저장소 초기화 시에만 호출
-    initialize_vectorstore()
+    #initialize_vectorstore()
 
     return render_template('index.html')
 
