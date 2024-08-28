@@ -1,18 +1,15 @@
-window.addEventListener('DOMContentLoaded', event => {
 
+window.addEventListener('DOMContentLoaded', event => {
     // Toggle the side navigation
-    const sidebarToggle = document.body.querySelector('#sidebarToggle');
-    if (sidebarToggle) {
-        // Uncomment Below to persist sidebar toggle between refreshes
-        // if (localStorage.getItem('sb|sidebar-toggle') === 'true') {
-        //     document.body.classList.toggle('sb-sidenav-toggled');
-        // }
-        sidebarToggle.addEventListener('click', event => {
-            event.preventDefault();
-            document.body.classList.toggle('sb-sidenav-toggled');
-            localStorage.setItem('sb|sidebar-toggle', document.body.classList.contains('sb-sidenav-toggled'));
-        });
-    }
+    const sidebarToggle = document.getElementById('sidebarToggle');
+    const sidebar = document.getElementById('sidebar');
+    const content = document.querySelector('.flex-grow-1');
+    
+    sidebarToggle.addEventListener('click', function(e) {
+        e.preventDefault();
+        sidebar.classList.toggle('d-none');
+        content.classList.toggle('ml-0');
+    });
 
     // Chatbot functionality
     const sendBtn = document.getElementById('send-btn');
@@ -27,8 +24,6 @@ window.addEventListener('DOMContentLoaded', event => {
         } else {
             messageElement.classList.add('ai-message');
         }
-
-        // innerHTML을 사용하여 HTML 태그를 포함한 메시지를 처리
         messageElement.innerHTML = message;
         chatWindow.appendChild(messageElement);
         chatWindow.scrollTop = chatWindow.scrollHeight;
@@ -38,11 +33,9 @@ window.addEventListener('DOMContentLoaded', event => {
         const message = userInput.value;
         if (message.trim() === "") return;
 
-        // 유저의 메시지를 채팅 창에 추가
         addMessageToChat(message, true);
         userInput.value = "";
 
-        // 서버로 메시지 보내기
         fetch('/get_response', {
             method: 'POST',
             headers: {
@@ -52,7 +45,6 @@ window.addEventListener('DOMContentLoaded', event => {
         })
         .then(response => response.json())
         .then(data => {
-            // 서버로부터 응답을 받아 AI의 메시지를 채팅 창에 추가
             addMessageToChat(data.response);
         })
         .catch(error => {
@@ -64,5 +56,27 @@ window.addEventListener('DOMContentLoaded', event => {
         if (event.key === 'Enter') {
             sendBtn.click();
         }
+    });
+
+    // Delete chat functionality
+    const deleteButtons = document.querySelectorAll('.delete-chat');
+    deleteButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();  // 이벤트 버블링 방지
+            const historyId = this.getAttribute('data-history-id');
+            if (confirm('정말로 이 채팅을 삭제하시겠습니까?')) {
+                fetch(`/delete_chat_data/${historyId}`, { method: 'POST' })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            this.closest('.list-group-item').remove();
+                            window.location.href = '/';
+                        } else {
+                            alert('채팅 삭제에 실패했습니다.');
+                        }
+                    });
+            }
+        });
     });
 });
